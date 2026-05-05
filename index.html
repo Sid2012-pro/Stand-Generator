@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <script src="https://cdn.jsdelivr.net/npm/groq-sdk/dist/index.mjs" type="module"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="icon" href="data:,">
+    <link href = "style.css" rel = "stylesheet">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stand Generator</title>
+</head>
+<body>
+    <h1 class = "TitleCard">Generate Stand</h1>
+    <p>Generate your own unique stands</p>
+    <div class = "GenerateStandContainer">
+        <button class= "generate"onclick="generate()">Generate Stand</button>
+    </div>
+    <h1 id="StandTitle"></h1>
+    <p id="StandDescription"></p>
+    <div class="chart-wrapper">
+        <canvas id="standChart"></canvas>
+    </div>
+    <br>
+    <br>
+    <br>
+    <div class="archive-controls">
+        <a href="archive.html" class="save-btn" style="text-decoration: none; display: inline-block;">View Archive</a>
+    </div>
+</body>
+<script type="module" src = "script.js"></script>
+</html>
