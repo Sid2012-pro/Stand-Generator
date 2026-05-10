@@ -2,98 +2,11 @@
 <html lang="en">
 <head>
     <link href="style.css" rel="stylesheet">
+    <link href="archive.css" rel="stylesheet">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Stand Archive</title>
-    <style>
-        .tier-letter {
-            font-family: 'Space Mono', monospace;
-            font-size: 2.5rem;
-            font-weight: bold;
-            margin-top: 10px;
-            letter-spacing: 0.15em;
-        }
-        .tier-A { color: #ffd700; }
-        .tier-B { color: #00ff88; }
-        .tier-C { color: #a5ccff; }
-        .tier-D { color: #da70d6; }
-        .tier-E { color: #ff6b6b; }
-        .archive-card-container {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
-            gap: 20px;
-            width: 100%;
-            max-width: 900px;
-            margin-top: 30px;
-        }
-        .archive-card {
-            background: rgba(255, 255, 255, 0.03);
-            border: 1px solid rgba(165, 204, 255, 0.2);
-            border-radius: 20px;
-            padding: 25px;
-            backdrop-filter: blur(5px);
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.25);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            text-align: center;
-        }
-        .archive-card:hover {
-            transform: translateY(-5px);
-            background: rgba(165, 204, 255, 0.08);
-            box-shadow: 0 0 25px rgba(165, 204, 255, 0.25);
-        }
-        .archive-card h3 {
-            font-family: 'Space Mono', monospace;
-            color: #a5ccff;
-            font-size: 1rem;
-            margin-bottom: 15px;
-            margin-top: 0;
-            word-break: break-word;
-        }
-        .empty-state {
-            text-align: center;
-            margin-top: 60px;
-        }
-        .empty-state p {
-            font-size: 1.1rem;
-            margin-bottom: 20px;
-        }
-        .back-button {
-            font-family: 'Quicksand', sans-serif;
-            font-weight: 600;
-            padding: 10px 25px;
-            font-size: 0.9rem;
-            background: rgba(255,255,255,0.05);
-            color: #a5ccff;
-            border: 1px solid rgba(165,205,255,0.3);
-            border-radius: 50px;
-            cursor: pointer;
-            backdrop-filter: blur(8px);
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
-            transition: all 0.3s ease;
-            text-decoration: none;
-            display: inline-block;
-            margin-top: 30px;
-        }
-        .back-button:hover {
-            background: rgba(165,204,255,0.1);
-            border-color: white;
-            color: white;
-        }
-        .clear-button {
-            background: rgba(255, 80, 80, 0.1);
-            border-color: rgba(255, 80, 80, 0.3);
-            color: #ffaaaa;
-            margin-left: 10px;
-        }
-        .clear-button:hover {
-            background: rgba(255, 80, 80, 0.2);
-            border-color: #ffaaaa;
-            color: #ff6b6b;
-        }
-    </style>
+
 </head>
 <body>
     <h1 class="TitleCard">Stand Archive</h1>
@@ -101,53 +14,15 @@
     <div class="archive-card-container" id="archiveContainer"></div>
     <div style="display: flex; justify-content: center; gap: 10px; margin-top: 30px;">
         <a href="index.html" class="back-button">← Back to Generator</a>
+        <label for="filter_by" class="filter_by">Filter By:</label>
+        <select name="filter_by" id="filter" class="filter_by">
+            <option value="date_asc">Date Generated (Ascending)</option>
+            <option value="date_des">Date Generated (Descending)</option>
+            <option value="stats_asc">Stats (Ascending)</option>
+            <option value="stats_des">Stats (Descending)</option>
+        </select>
         <button onclick="clearArchive()" class="back-button clear-button">Clear Archive</button>
     </div>
 </body>
-<script>
-    function renderArchive() {
-        const container = document.getElementById('archiveContainer');
-        const archive = JSON.parse(localStorage.getItem('standArchive') || '[]');
-
-        if (archive.length === 0) {
-            container.innerHTML = '';
-            const emptyDiv = document.createElement('div');
-            emptyDiv.className = 'empty-state';
-            emptyDiv.innerHTML = `
-                <p>No Stands in your archive yet.</p>
-                <p style="font-size: 0.95rem; color: #888;">Generate your first Stand to add it to the archive!</p>
-                <a href="index.html" class="back-button">Create Stand</a>
-            `;
-            container.parentElement.appendChild(emptyDiv);
-            return;
-        }
-
-        container.innerHTML = '';
-        archive.forEach(stand => {
-            const card = document.createElement('div');
-            card.className = 'archive-card';
-            const tierClass = `tier-${stand.avgTier}`;
-            card.innerHTML = `
-                <h3>${escapeHtml(stand.name)}</h3>
-                <div class="tier-letter ${tierClass}">${stand.avgTier}</div>
-            `;
-            container.appendChild(card);
-        });
-    }
-
-    function clearArchive() {
-        if (confirm('Are you sure you want to clear your entire Stand archive? This cannot be undone.')) {
-            localStorage.removeItem('standArchive');
-            renderArchive();
-        }
-    }
-
-    function escapeHtml(text) {
-        const div = document.createElement('div');
-        div.textContent = text;
-        return div.innerHTML;
-    }
-
-    renderArchive();
-</script>
+<script src="archive.js"></script>
 </html>

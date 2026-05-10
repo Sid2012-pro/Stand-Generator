@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="battle.css">
+    <title>Battle</title>
+</head>
+<body>
+    <div class="map-container" id="boss-map">
+    </div>
+    <h1>Battle</h1>    
+    <div class="hp-container">
+        <label>PLAYER</label>
+        <div id="player-hp-bar" class="hp-fill" style="width: 100%;"></div>
+    </div>   
+    <div class="hp-container">
+        <label>ENEMY</label>
+        <div id="enemy-hp-bar" class="hp-fill" style="width: 100%;"></div>
+    </div>
+    <div id="battle-log">
+        <p>Waiting for the first move...</p>
+    </div>
+    <button id="roll-button">DICE ROLL</button>
+    <p id="roll-text"></p>
+    <div id="ProgressButtonHolder">
+
+    </div>
+</body>
+<script type='module' src="battle.js"></script>
+</html>
